@@ -26,11 +26,11 @@ style(type='text/css').
   }
 
 h1 Hi #{name},
-  div.message-body 
-    p Someone requested a password reset for this email address. If it was you please click 
-      a(href="#{passwordResetLink}") this link
-    |.
-    p If it wasn't you, ignore this email.
+div.message-body 
+  p Someone requested a password reset for this email address. If it was you please click 
+    a(href="#{passwordResetLink}") this link
+  |.
+  p If it wasn't you, ignore this email.
   `;
 }
 ```
