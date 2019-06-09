@@ -9,5 +9,5 @@ export abstract class BaseEmailTemplate<TemplateParameters = any> {
   /**
    * DO NOT OVERWRITE this property. It's used for type-checking.
    */
-  public readonly templateParameters: TemplateParameters;
+  public readonly templateParametersType: TemplateParameters;
 }

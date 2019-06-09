@@ -13,7 +13,11 @@ export class MailService {
     private templateService: TemplateService,
   ) {}
 
-  async send<T extends BaseEmailTemplate>(recipient: string, template: new () => T, locals?: T['templateParameters']) {
+  async send<T extends BaseEmailTemplate>(
+    recipient: string,
+    template: new () => T,
+    locals?: T['templateParametersType'],
+  ) {
     const data: Mailgun.messages.SendData = {
       from: 'Spreadmonitor <no-reply@spreadmonitor.com>',
       to: recipient,
