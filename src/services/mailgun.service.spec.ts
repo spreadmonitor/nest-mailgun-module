@@ -40,6 +40,7 @@ describe('MailService', () => {
       const recipient = 'blackhole@spreadmonitor.com';
 
       class SimpleEmailTemplate extends BaseEmailTemplate<{ name: string; date: Date }> {
+        public title: string = 'Subject';
         public body: string = `
 h1 Dear #{name}
 

@@ -6,7 +6,10 @@ import { MailgunModuleOptions } from '../module-options.class';
 
 @Injectable()
 export class TemplateService {
-  private readonly templates: Map<new () => BaseEmailTemplate, PugTemplateRendererFn> = new Map();
+  private readonly templates: Map<
+    new () => BaseEmailTemplate,
+    { message: PugTemplateRendererFn; title: PugTemplateRendererFn }
+  > = new Map();
 
   // TODO: Make this injectable via forRoot
   private pugCompileOptions: PugCompileOptions = {};
@@ -15,18 +18,19 @@ export class TemplateService {
     Object.values(moduleOptions.templates).forEach(template => this.registerTemplate(template));
   }
 
-  public registerTemplate(template: new () => BaseEmailTemplate): PugTemplateRendererFn {
+  public registerTemplate(template: new () => BaseEmailTemplate) {
     let valid = this.validateTemplate(template);
-    let pugTemplateRendererFn: PugTemplateRendererFn = null;
 
     if (!valid) {
       throw new Error('Invalid template recieved.');
     }
 
-    pugTemplateRendererFn = pugCompile(new template().body, this.pugCompileOptions);
-    this.templates.set(template, pugTemplateRendererFn);
+    this.templates.set(template, {
+      message: pugCompile(new template().body, this.pugCompileOptions),
+      title: pugCompile(new template().title, this.pugCompileOptions),
+    });
 
-    return pugTemplateRendererFn;
+    return this.templates.get(template);
   }
 
   /**
@@ -34,17 +38,34 @@ export class TemplateService {
    * @param template the template to render
    * @param locals the variables passed to the renderer
    */
-  render<T extends BaseEmailTemplate>(template: new () => T, locals?: T['templateParameters']): string {
+  renderMessage<T extends BaseEmailTemplate>(template: new () => T, locals?: T['templateParameters']): string {
+    let renderer = this.getTemplateInstance(template);
+
+    return renderer.message(locals);
+  }
+
+  /**
+   * Returns the rendered HTML title.
+   * @param template the template to render
+   * @param locals the variables passed to the renderer
+   */
+  renderTitle<T extends BaseEmailTemplate>(template: new () => T, locals?: T['templateParameters']): string {
+    let renderer = this.getTemplateInstance(template);
+
+    return renderer.title(locals);
+  }
+
+  private getTemplateInstance<T extends BaseEmailTemplate>(template: new () => T) {
     let pugTemplateRendererFn = this.templates.get(template);
 
     /**
      * If the template hasnt been registered yet, we try to register it.
      */
     if (!pugTemplateRendererFn) {
-      pugTemplateRendererFn = this.registerTemplate(template);
+      return this.registerTemplate(template);
     }
 
-    return pugTemplateRendererFn(locals);
+    return pugTemplateRendererFn;
   }
 
   /**
@@ -56,7 +77,9 @@ export class TemplateService {
     try {
       const instance = new template();
 
-      return instance instanceof BaseEmailTemplate && typeof instance.body === 'string';
+      return (
+        instance instanceof BaseEmailTemplate && typeof instance.body === 'string' && typeof instance.title === 'string'
+      );
     } catch (error) {
       // TODO: It would be better to tell the developer why the template is not valid.
       // We do not care about errors, it means the tempate is not valid.

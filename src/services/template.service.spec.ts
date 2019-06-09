@@ -8,10 +8,12 @@ describe('TemplateService', () => {
   let app: TestingModule;
 
   class ValidBaseTemplateOne extends BaseEmailTemplate {
-    body: string = `span Hello World!`;
+    public title: string = 'Subject';
+    public body: string = `span Hello World!`;
   }
   class ValidBaseTemplateTwo extends BaseEmailTemplate<{ name: string }> {
-    body: string = `span Hello #{name}!`;
+    public title: string = 'Subject';
+    public body: string = `span Hello #{name}!`;
   }
 
   beforeAll(async () => {
@@ -44,6 +46,7 @@ describe('TemplateService', () => {
       const service = app.get(TemplateService);
 
       class ValidTemplate extends BaseEmailTemplate<void> {
+        public readonly title: string = 'Subject';
         public readonly body: string = 'Duh';
       }
 
@@ -56,6 +59,7 @@ describe('TemplateService', () => {
       const service = app.get(TemplateService);
 
       class InValidTemplate extends BaseEmailTemplate<void> {
+        public readonly title: string = null;
         public readonly body: string = null;
       }
 
@@ -70,14 +74,13 @@ describe('TemplateService', () => {
     it('should render valid static template', () => {
       const service = app.get(TemplateService);
 
-      expect(service.render(ValidBaseTemplateOne)).toBe('<span>Hello World!</span>');
+      expect(service.renderMessage(ValidBaseTemplateOne)).toBe('<span>Hello World!</span>');
     });
 
     it('should render template correctly with passed locals', () => {
       const service = app.get(TemplateService);
-      const output = `<span>Hello World!</span>`;
 
-      expect(service.render(ValidBaseTemplateTwo, { name: 'World' })).toBe('<span>Hello World!</span>');
+      expect(service.renderMessage(ValidBaseTemplateTwo, { name: 'World' })).toBe('<span>Hello World!</span>');
     });
   });
 });
