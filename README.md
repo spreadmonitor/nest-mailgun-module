@@ -55,11 +55,7 @@ export class SignupController {
 
 For detailed usage please read the [documentation][docs/readme.md].
 
-## Stay in touch
+## Contact
 
 - Author - [Attila Olah](https://twitter.com/NoNameProvided_)
 - Repository - [spreadmonitor/nest-mailgun-module](https://github.com/spreadmonitor/nest-mailgun-module)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
