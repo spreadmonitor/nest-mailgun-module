@@ -1,12 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import {
-  compile as pugCompile,
-  Options as PugCompileOptions,
-  compileTemplate as PugTemplateRendererFn,
-  LocalsObject,
-} from 'pug';
+import { compile as pugCompile, Options as PugCompileOptions, compileTemplate as PugTemplateRendererFn } from 'pug';
 
 import { BaseEmailTemplate } from '../base-template.class';
+import { MailgunModuleOptions } from '../module-options.class';
 
 @Injectable()
 export class TemplateService {
@@ -14,6 +10,10 @@ export class TemplateService {
 
   // TODO: Make this injectable via forRoot
   private pugCompileOptions: PugCompileOptions = {};
+
+  constructor(private readonly moduleOptions: MailgunModuleOptions) {
+    Object.values(moduleOptions.templates).forEach(template => this.registerTemplate(template));
+  }
 
   public registerTemplate(template: new () => BaseEmailTemplate): PugTemplateRendererFn {
     let valid = this.validateTemplate(template);

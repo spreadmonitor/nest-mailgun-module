@@ -1,43 +1,83 @@
 import { Test, TestingModule } from '@nestjs/testing';
+
 import { TemplateService } from './template.service';
 import { BaseEmailTemplate } from '../base-template.class';
+import { MailgunModuleOptions } from '../module-options.class';
 
 describe('TemplateService', () => {
   let app: TestingModule;
 
-  beforeEach(async () => {
+  class ValidBaseTemplateOne extends BaseEmailTemplate {
+    body: string = `span Hello World!`;
+  }
+  class ValidBaseTemplateTwo extends BaseEmailTemplate<{ name: string }> {
+    body: string = `span Hello #{name}!`;
+  }
+
+  beforeAll(async () => {
     app = await Test.createTestingModule({
-      providers: [TemplateService],
+      providers: [
+        TemplateService,
+        {
+          provide: MailgunModuleOptions,
+          useValue: {
+            templates: {
+              BaseTemplateOne: ValidBaseTemplateOne,
+              BaseTemplateTwo: ValidBaseTemplateTwo,
+            },
+          },
+        },
+      ],
     }).compile();
   });
 
-  describe.only('render', () => {
-    it('should render valid template', () => {
+  describe('constructor', () => {
+    it('should register templates passed in MailgunModuleOptions', () => {
       const service = app.get(TemplateService);
-      const input = `span Hello World!`;
-      const output = `<span>Hello World!</span>`;
+
+      expect(service['templates'].size).toBe(2);
+    });
+  });
+
+  describe('register', () => {
+    it('should register valid templates', () => {
+      const service = app.get(TemplateService);
 
       class ValidTemplate extends BaseEmailTemplate<void> {
-        public readonly body = input;
+        public readonly body: string = 'Duh';
       }
 
-      expect(service.render(ValidTemplate)).toBe(output);
+      service.registerTemplate(ValidTemplate);
+
+      expect(service['templates'].size).toBe(3);
     });
 
-    it('should render correctly with passed locals', () => {
+    it('should throw error on invalid templates', () => {
       const service = app.get(TemplateService);
-      const input = `span Hello #{name}!`;
+
+      class InValidTemplate extends BaseEmailTemplate<void> {
+        public readonly body: string = null;
+      }
+
+      expect(() => {
+        service.registerTemplate(InValidTemplate);
+      }).toThrow();
+      expect(service['templates'].size).toBe(3);
+    });
+  });
+
+  describe('render', () => {
+    it('should render valid static template', () => {
+      const service = app.get(TemplateService);
+
+      expect(service.render(ValidBaseTemplateOne)).toBe('<span>Hello World!</span>');
+    });
+
+    it('should render template correctly with passed locals', () => {
+      const service = app.get(TemplateService);
       const output = `<span>Hello World!</span>`;
 
-      interface TemplateLocals {
-        name: string;
-      }
-
-      class ValidTemplate extends BaseEmailTemplate<TemplateLocals> {
-        public readonly body = input;
-      }
-
-      expect(service.render(ValidTemplate, { name: 'World' })).toBe(output);
+      expect(service.render(ValidBaseTemplateTwo, { name: 'World' })).toBe('<span>Hello World!</span>');
     });
   });
 });

@@ -1,9 +1,12 @@
 import { Module, DynamicModule } from '@nestjs/common';
-import { MailgunService } from './services/mailgun.service';
+import * as Mailgun from 'mailgun-js';
+
 import { MailgunModuleOptions } from './module-options.class';
+import { TemplateService, MailService } from './services';
+import { InternalModuleInjectionTokens } from './injection-tokens.enum';
 
 @Module({
-  providers: [MailgunService],
+  providers: [MailService, TemplateService],
 })
 export class MailgunModule {
   static forRoot(options: MailgunModuleOptions): DynamicModule {
@@ -14,8 +17,15 @@ export class MailgunModule {
           provide: MailgunModuleOptions,
           useValue: options,
         },
+        {
+          provide: InternalModuleInjectionTokens.MailgunClient,
+          useValue: Mailgun({
+            apiKey: options.mailgunApiKey,
+            domain: options.mailgunDomain,
+          }),
+        },
       ],
-      exports: [MailgunService],
+      exports: [MailService, TemplateService],
     };
   }
 }
