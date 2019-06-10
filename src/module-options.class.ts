@@ -7,7 +7,7 @@ export class MailgunModuleOptions {
   /**
    * Array of initial template classes. New templates can be registered later via the `TemplateService.registerTemplate()` function.
    */
-  templates: Array<new () => BaseEmailTemplate>;
+  templates: { [className: string]: new () => BaseEmailTemplate };
 
   /**
    * The Mailgun domain. (Note: The sender domain must be passed here not the API domain.)
