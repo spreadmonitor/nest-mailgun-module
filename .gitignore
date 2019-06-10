@@ -49,3 +49,6 @@ dist
 build
 tmp
 out-tsc
+
+# Typescript incremental build information
+*.tsbuildinfo

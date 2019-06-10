@@ -3,13 +3,11 @@ import { compile as pugCompile, Options as PugCompileOptions, compileTemplate as
 
 import { BaseEmailTemplate } from '../base-template.class';
 import { MailgunModuleOptions } from '../module-options.class';
+import { EmailTemplateRenderer } from '@core/interfaces';
 
 @Injectable()
 export class TemplateService {
-  private readonly templates: Map<
-    new () => BaseEmailTemplate,
-    { message: PugTemplateRendererFn; title: PugTemplateRendererFn }
-  > = new Map();
+  private readonly templates: Map<new () => BaseEmailTemplate, EmailTemplateRenderer> = new Map();
 
   // TODO: Make this injectable via forRoot
   private pugCompileOptions: PugCompileOptions = {};
@@ -18,7 +16,7 @@ export class TemplateService {
     Object.values(moduleOptions.templates).forEach(template => this.registerTemplate(template));
   }
 
-  public registerTemplate(template: new () => BaseEmailTemplate) {
+  public registerTemplate(template: new () => BaseEmailTemplate): EmailTemplateRenderer {
     let valid = this.validateTemplate(template);
     let instance: BaseEmailTemplate;
     let fullTitleString: string;
@@ -38,7 +36,7 @@ export class TemplateService {
       title: pugCompile(fullTitleString, this.pugCompileOptions),
     });
 
-    return this.templates.get(template);
+    return this.templates.get(template) as EmailTemplateRenderer;
   }
 
   /**
@@ -63,7 +61,7 @@ export class TemplateService {
     return renderer.title(locals);
   }
 
-  private getTemplateInstance<T extends BaseEmailTemplate>(template: new () => T) {
+  private getTemplateInstance<T extends BaseEmailTemplate>(template: new () => T): EmailTemplateRenderer {
     let pugTemplateRendererFn = this.templates.get(template);
 
     /**
