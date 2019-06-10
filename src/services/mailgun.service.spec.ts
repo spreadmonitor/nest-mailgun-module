@@ -34,7 +34,7 @@ describe('MailService', () => {
     }).compile();
   });
 
-  describe('send', async () => {
+  describe('send', () => {
     it('should call Mailgun client with correct properties', async () => {
       const service = app.get(MailService);
       const recipient = 'blackhole@spreadmonitor.com';
