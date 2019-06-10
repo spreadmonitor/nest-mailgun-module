@@ -17,7 +17,7 @@ interface PasswordResetTemplateData {
   passwordResetLink: string;
 }
 class PasswordResetTemplate extends BaseEmailTemplate<PasswordResetTemplateData> {
-  public readonly title: string = 'Awesome Product - Password reset request';
+  public readonly title: string = `Awesome Product - Password reset request`;
 
   public readonly body: string = `
 style(type='text/css').
@@ -28,7 +28,7 @@ style(type='text/css').
 h1 Hi #{name},
 div.message-body 
   p Someone requested a password reset for this email address. If it was you please click 
-    a(href="#{passwordResetLink}") this link
+    a(href=passwordResetLink) this link
   |.
   p If it wasn't you, ignore this email.
   `;

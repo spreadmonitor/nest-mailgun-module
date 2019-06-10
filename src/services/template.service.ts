@@ -20,14 +20,22 @@ export class TemplateService {
 
   public registerTemplate(template: new () => BaseEmailTemplate) {
     let valid = this.validateTemplate(template);
+    let instance: BaseEmailTemplate;
+    let fullTitleString: string;
 
     if (!valid) {
       throw new Error('Invalid template recieved.');
     }
 
+    instance = new template();
+    /**
+     * We don't want the first word of the title to be interpreted as an HTML tag.
+     */
+    fullTitleString = instance.title.startsWith('|') ? instance.title : `| ${instance.title}`;
+
     this.templates.set(template, {
-      message: pugCompile(new template().body, this.pugCompileOptions),
-      title: pugCompile(new template().title, this.pugCompileOptions),
+      message: pugCompile(instance.body, this.pugCompileOptions),
+      title: pugCompile(fullTitleString, this.pugCompileOptions),
     });
 
     return this.templates.get(template);
