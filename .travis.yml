@@ -4,4 +4,13 @@ node_js:
 install:
   - npm ci
 script:
-  - npm test
+  - npm run prettier:check
+  - npm run lint:check
+  - npm run test:ci
+before_deploy:
+  - npm run build
+  - cp LICENSE build/LICENSE
+  - cp README.md build/README.md
+  - cp package.json build/package.json
+  - cp package-lock.json build/package-lock.json
+  - cd build

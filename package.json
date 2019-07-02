@@ -6,8 +6,10 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc -p tsconfig.prod.json",
-    "prettify:ts": "prettier --write ./src/**/*.ts ./src/*.ts",
-    "lint": "tslint --project ./tsconfig.json --format stylish",
+    "prettier:format": "prettier --write ./src/**/*.ts ./src/*.ts",
+    "prettier:check": "prettier --check ./src/**/*.ts ./src/*.ts",
+    "lint:fix": "tslint --project ./tsconfig.json --format stylish --fix",
+    "lint:check": "tslint --project ./tsconfig.json --format stylish",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
