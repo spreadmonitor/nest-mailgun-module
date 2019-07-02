@@ -10,7 +10,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "sourceMap": true,
-    "incremental": true,
+    "incremental": false,
     "lib": ["es2017"],
     "paths": {
       "@core/*": ["./*"]
