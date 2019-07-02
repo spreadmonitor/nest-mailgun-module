@@ -4,6 +4,7 @@
   "description": "Re-usable NestJS module for sending emails via Mailgun.",
   "author": "Attila Olah <attila.olah@spreadmonitor.com>",
   "license": "MIT",
+  "main": "index.js",
   "scripts": {
     "build": "rimraf ./dist && tsc -p tsconfig.prod.json",
     "prettier:format": "prettier --write ./src/**/*.ts ./src/*.ts",
