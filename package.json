@@ -4,6 +4,12 @@
   "description": "Re-usable NestJS module for sending emails via Mailgun.",
   "author": "Attila Olah <attila.olah@spreadmonitor.com>",
   "license": "MIT",
+  "homepage": "https://github.com/spreadmonitor/nest-mailgun-module#nest-mailgun-module",
+  "bugs": "https://github.com/spreadmonitor/nest-mailgun-module/issues",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:spreadmonitor/nest-mailgun-module.git"
+  },
   "main": "index.js",
   "scripts": {
     "build": "rimraf ./dist && tsc -p tsconfig.prod.json",
