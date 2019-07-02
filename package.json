@@ -12,7 +12,7 @@
   },
   "main": "index.js",
   "scripts": {
-    "build": "rimraf ./dist && tsc -p tsconfig.prod.json",
+    "build": "rimraf ./build && tsc -p tsconfig.prod.json",
     "prettier:format": "prettier --write ./src/**/*.ts ./src/*.ts",
     "prettier:check": "prettier --check ./src/**/*.ts ./src/*.ts",
     "lint:fix": "tslint --project ./tsconfig.json --format stylish --fix",
