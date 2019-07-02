@@ -1,6 +1,6 @@
-# nest-mailgun-module
+# nest-mailgun-module [![Build Status](https://travis-ci.com/spreadmonitor/nest-mailgun-module.svg?token=vtTA9yuf6Qfrwwgxq3tZ&branch=master)](https://travis-ci.com/spreadmonitor/nest-mailgun-module)
 
-[![Build Status](https://travis-ci.com/spreadmonitor/nest-mailgun-module.svg?token=vtTA9yuf6Qfrwwgxq3tZ&branch=master)](https://travis-ci.com/spreadmonitor/nest-mailgun-module)
+
 
 Re-usable [NestJS](https://github.com/nestjs/nest) module for sending emails via [Mailgun](https://www.mailgun.com/).
 
