@@ -14,3 +14,11 @@ before_deploy:
   - cp package.json build/package.json
   - cp package-lock.json build/package-lock.json
   - cd build
+deploy:
+  provider: npm
+  email: npm-ci-write@spreadmonitor.com
+  api_key:
+    secure: $NPM_PUBLISH_TOKEN
+  on:
+    branch: master
+  skip_cleanup: true
