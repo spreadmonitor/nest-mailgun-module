@@ -5,7 +5,7 @@
   "author": "Attila Olah <attila.olah@spreadmonitor.com>",
   "license": "MIT",
   "scripts": {
-    "build": "tsc -p tsconfig.prod.json",
+    "build": "rimraf ./dist && tsc -p tsconfig.prod.json",
     "prettier:format": "prettier --write ./src/**/*.ts ./src/*.ts",
     "prettier:check": "prettier --check ./src/**/*.ts ./src/*.ts",
     "lint:fix": "tslint --project ./tsconfig.json --format stylish --fix",
@@ -35,10 +35,11 @@
     "@types/pug": "^2.0.4",
     "jest": "^24.8.0",
     "prettier": "^1.15.3",
+    "reflect-metadata": "^0.1.12",
+    "rimraf": "^2.6.3",
+    "rxjs": "^6.5.2",
     "ts-jest": "24.0.2",
     "tslint": "5.16.0",
-    "typescript": "3.4.3",
-    "reflect-metadata": "^0.1.12",
-    "rxjs": "^6.5.2"
+    "typescript": "3.4.3"
   }
 }
