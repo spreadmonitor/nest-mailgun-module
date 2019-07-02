@@ -17,7 +17,7 @@ export class TemplateService {
   }
 
   public registerTemplate(template: new () => BaseEmailTemplate): EmailTemplateRenderer {
-    let valid = this.validateTemplate(template);
+    const valid = this.validateTemplate(template);
     let instance: BaseEmailTemplate;
     let fullTitleString: string;
 
@@ -45,7 +45,7 @@ export class TemplateService {
    * @param locals the variables passed to the renderer
    */
   renderMessage<T extends BaseEmailTemplate>(template: new () => T, locals?: T['templateParametersType']): string {
-    let renderer = this.getTemplateInstance(template);
+    const renderer = this.getTemplateInstance(template);
 
     return renderer.message(locals);
   }
@@ -56,13 +56,13 @@ export class TemplateService {
    * @param locals the variables passed to the renderer
    */
   renderTitle<T extends BaseEmailTemplate>(template: new () => T, locals?: T['templateParametersType']): string {
-    let renderer = this.getTemplateInstance(template);
+    const renderer = this.getTemplateInstance(template);
 
     return renderer.title(locals);
   }
 
   private getTemplateInstance<T extends BaseEmailTemplate>(template: new () => T): EmailTemplateRenderer {
-    let pugTemplateRendererFn = this.templates.get(template);
+    const pugTemplateRendererFn = this.templates.get(template);
 
     /**
      * If the template hasnt been registered yet, we try to register it.
