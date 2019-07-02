@@ -59,3 +59,7 @@ For detailed usage please read the [documentation][docs/readme.md].
 
 - Author - [Attila Olah](https://twitter.com/NoNameProvided_)
 - Repository - [spreadmonitor/nest-mailgun-module](https://github.com/spreadmonitor/nest-mailgun-module)
+
+## License
+
+This project is licensed under [MIT](https://choosealicense.com/licenses/mit/).
