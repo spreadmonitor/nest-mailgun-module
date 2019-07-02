@@ -2,7 +2,7 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "sourceMap": true,
-    "removeComments": true
+    "removeComments": false
   },
   "exclude": ["node_modules", "test", "dist", "**/*spec.ts"]
 }
