@@ -7,8 +7,8 @@ script:
   - npm run prettier:check
   - npm run lint:check
   - npm run test:ci
-before_deploy:
   - npm run build
+before_deploy:
   - cp LICENSE build/LICENSE
   - cp README.md build/README.md
   - cp package.json build/package.json
