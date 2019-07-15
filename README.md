@@ -1,4 +1,4 @@
-# nest-mailgun-module [![Build Status](https://travis-ci.com/spreadmonitor/nest-mailgun-module.svg?token=vtTA9yuf6Qfrwwgxq3tZ&branch=develop)](https://travis-ci.com/spreadmonitor/nest-mailgun-module)
+# nest-mailgun-module [![Build Status](https://travis-ci.com/NoNameProvided/nest-mailgun-module.svg?token=vtTA9yuf6Qfrwwgxq3tZ&branch=develop)](https://travis-ci.com/NoNameProvided/nest-mailgun-module)
 
 
 
