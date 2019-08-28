@@ -1,6 +1,6 @@
 {
   "name": "@spreadmonitor/nest-mailer-module",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Re-usable NestJS module for sending emails via Mailgun.",
   "author": "Attila Olah <attila.olah@spreadmonitor.com>",
   "license": "MIT",
@@ -13,8 +13,8 @@
   "main": "index.js",
   "scripts": {
     "build": "rimraf ./build && tsc -p tsconfig.prod.json",
-    "prettier:format": "prettier --write ./src/**/*.ts ./src/*.ts",
-    "prettier:check": "prettier --check ./src/**/*.ts ./src/*.ts",
+    "prettier:format": "prettier --write \"./src/**/*.ts\"",
+    "prettier:check": "prettier --check \"./src/**/*.ts\"",
     "lint:fix": "tslint --project ./tsconfig.json --format stylish --fix",
     "lint:check": "tslint --project ./tsconfig.json --format stylish",
     "test": "jest",

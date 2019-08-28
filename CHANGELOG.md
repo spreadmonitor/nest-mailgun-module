@@ -6,6 +6,12 @@ _This changelog follows the [keep a changelog][1] format to maintain a human rea
 
 _no changes since the last release yet._
 
+## [0.1.2] - 2019-08-28
+
+### Added
+
+- added the `MailgunModuleOptions.mailgunBaseUrl` option to allow specifying the used API base url for the Mailgun API
+
 ## [0.1.1] - 2019-07-02
 
 ### Fixed

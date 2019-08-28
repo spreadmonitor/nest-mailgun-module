@@ -22,6 +22,7 @@ export class MailgunModule {
           useValue: Mailgun({
             apiKey: options.mailgunApiKey,
             domain: options.mailgunDomain,
+            host: options.mailgunBaseUrl ? options.mailgunBaseUrl : 'api.mailgun.net',
           }),
         },
       ],
