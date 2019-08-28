@@ -22,4 +22,11 @@ export class MailgunModuleOptions {
    * FORMAT: `xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-xxxxxxxx-xxxxxxxx`
    */
   mailgunApiKey!: string;
+
+  /**
+   * The root endpoint of the Mailgun API. This parameter can be used to set the differetn API root for EU domains.
+   *
+   * FORMAT:  `api.eu.mailgun.net` or `api.mailgun.net`
+   */
+  mailgunBaseUrl!: string;
 }
