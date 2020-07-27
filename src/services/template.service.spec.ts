@@ -45,7 +45,7 @@ describe('TemplateService', () => {
     it('should register valid templates', () => {
       const service = app.get(TemplateService);
 
-      class ValidTemplate extends BaseEmailTemplate<void> {
+      class ValidTemplate extends BaseEmailTemplate<undefined> {
         public readonly title: string = 'Subject';
         public readonly body: string = 'Duh';
       }
@@ -58,7 +58,7 @@ describe('TemplateService', () => {
     it('should throw error on invalid templates', () => {
       const service = app.get(TemplateService);
 
-      class InValidTemplate extends BaseEmailTemplate<void> {
+      class InValidTemplate extends BaseEmailTemplate<undefined> {
         public readonly title: string = null;
         public readonly body: string = null;
       }

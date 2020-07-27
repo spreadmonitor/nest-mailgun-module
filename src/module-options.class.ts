@@ -10,6 +10,13 @@ export class MailgunModuleOptions {
   templates!: { [className: string]: new () => BaseEmailTemplate };
 
   /**
+   * The sender used in the from field of the sent emails.
+   *
+   * Example: `Spreadmonitor <no-reply@spreadmonitor.com>`
+   */
+  sender!: string;
+
+  /**
    * The Mailgun domain. (Note: The sender domain must be passed here not the API domain.)
    *
    * @example `sandboxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.mailgun.org`

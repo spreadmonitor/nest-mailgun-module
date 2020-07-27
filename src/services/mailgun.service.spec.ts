@@ -8,8 +8,8 @@ import { MailgunModuleOptions } from '../module-options.class';
 
 describe('MailService', () => {
   let app: TestingModule;
-  let sendFnMock = jest.fn();
-  let mailgunClientMock = {
+  const sendFnMock = jest.fn();
+  const mailgunClientMock = {
     messages: () => ({ send: sendFnMock }),
   };
 
@@ -20,6 +20,7 @@ describe('MailService', () => {
           provide: MailgunModuleOptions,
           useValue: {
             templates: {},
+            sender: 'Teszt Elek <me@tesztelek.never>',
             mailgunDomain: 'sandboxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.mailgun.org',
             mailgunApiKey: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-xxxxxxxx-xxxxxxxx',
           },
@@ -55,6 +56,7 @@ div.message-body
       });
 
       expect(sendFnMock.mock.calls.length).toBe(1);
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       expect(sendFnMock.mock.calls[0][0].to).toBe(recipient);
     });
   });
