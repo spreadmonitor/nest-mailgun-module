@@ -1,4 +1,4 @@
-# nest-mailgun-module 
+# nest-mailgun-module
 
 ![Build Status](https://github.com/spreadmonitor/nest-mailgun-module/workflows/CI/badge.svg)
 [![codecov](https://codecov.io/gh/spreadmonitor/nest-mailgun-module/branch/develop/graph/badge.svg)](https://codecov.io/gh/spreadmonitor/nest-mailgun-module)
@@ -23,6 +23,7 @@ import * as TEMPLATES from './email-templates';
   imports: [
     MailgunModule.forRoot({
       templates: TEMPLATES,
+      sender: 'Fancy Co. <no-reply@fancy.com>',
       mailgunApiKey: process.env['MAILGUN_API_KEY'],
       mailgunDomain: process.env['MAILGUN_DOMAIN'],
     }),
@@ -54,7 +55,7 @@ export class SignupController {
 }
 ```
 
-For detailed usage please read the [documentation][docs/readme.md].
+For detailed usage please read the [documentation](docs/usage.md).
 
 ## Contact
 
