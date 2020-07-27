@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { compile as pugCompile, Options as PugCompileOptions, compileTemplate as PugTemplateRendererFn } from 'pug';
+import { compile as pugCompile, Options as PugCompileOptions } from 'pug';
 
 import { BaseEmailTemplate } from '../base-template.class';
 import { MailgunModuleOptions } from '../module-options.class';
@@ -7,29 +7,23 @@ import { EmailTemplateRenderer } from '@core/interfaces';
 
 @Injectable()
 export class TemplateService {
-  private readonly templates: Map<new () => BaseEmailTemplate, EmailTemplateRenderer> = new Map();
+  private readonly templates = new Map<new () => BaseEmailTemplate, EmailTemplateRenderer>();
 
   // TODO: Make this injectable via forRoot
   private pugCompileOptions: PugCompileOptions = {};
 
-  constructor(private readonly moduleOptions: MailgunModuleOptions) {
+  constructor(readonly moduleOptions: MailgunModuleOptions) {
     Object.values(moduleOptions.templates).forEach(template => this.registerTemplate(template));
   }
 
   public registerTemplate(template: new () => BaseEmailTemplate): EmailTemplateRenderer {
-    const valid = this.validateTemplate(template);
-    let instance: BaseEmailTemplate;
-    let fullTitleString: string;
-
-    if (!valid) {
+    if (!this.validateTemplate(template)) {
       throw new Error('Invalid template recieved.');
     }
 
-    instance = new template();
-    /**
-     * We don't want the first word of the title to be interpreted as an HTML tag.
-     */
-    fullTitleString = instance.title.startsWith('|') ? instance.title : `| ${instance.title}`;
+    const instance: BaseEmailTemplate = new template();
+    /* We don't want the first word of the title to be interpreted as an HTML tag. */
+    const fullTitleString = instance.title.startsWith('|') ? instance.title : `| ${instance.title}`;
 
     this.templates.set(template, {
       message: pugCompile(instance.body, this.pugCompileOptions),
