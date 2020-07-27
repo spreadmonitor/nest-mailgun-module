@@ -20,6 +20,7 @@ describe('MailService', () => {
           provide: MailgunModuleOptions,
           useValue: {
             templates: {},
+            sender: 'Teszt Elek <me@tesztelek.never>',
             mailgunDomain: 'sandboxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.mailgun.org',
             mailgunApiKey: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-xxxxxxxx-xxxxxxxx',
           },
