@@ -13,14 +13,12 @@
   "main": "index.js",
   "scripts": {
     "build": "rimraf ./build && tsc -p tsconfig.prod.json",
-    "prettier:format": "prettier --write \"./src/**/*.ts\"",
-    "prettier:check": "prettier --check \"./src/**/*.ts\"",
-    "lint:fix": "tslint --project ./tsconfig.json --format stylish --fix",
-    "lint:check": "tslint --project ./tsconfig.json --format stylish",
+    "prettier:check": "prettier --check \"**/*.{ts,md}\"",
+    "prettier:fix": "prettier --write \"**/*.{ts,md}\"",
+    "lint:check": "eslint --max-warnings 0 --ext .ts src/",
+    "lint:fix": "eslint --max-warnings 0 --fix --ext .ts src/",
     "test": "jest",
-    "test:watch": "jest --watch",
-    "test:cov": "jest --coverage",
-    "test:ci": "jest --runInBand",
+    "test:ci": "jest --runInBand --coverage --verbose",
     "test:debug": "node --inspect-brk node_modules/.bin/jest --runInBand"
   },
   "peerDependencies": {
