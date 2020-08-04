@@ -3,7 +3,7 @@ import { compile as pugCompile, Options as PugCompileOptions } from 'pug';
 
 import { BaseEmailTemplate } from '../base-template.class';
 import { MailgunModuleOptions } from '../module-options.class';
-import { EmailTemplateRenderer } from '@core/interfaces';
+import { EmailTemplateRenderer } from '../interfaces';
 
 @Injectable()
 export class TemplateService {

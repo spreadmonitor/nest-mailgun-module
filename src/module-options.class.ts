@@ -1,4 +1,4 @@
-import { BaseEmailTemplate } from '@core/base-template.class';
+import { BaseEmailTemplate } from './base-template.class';
 
 /**
  * The options object passed to the MailgunModule.forRoot function.

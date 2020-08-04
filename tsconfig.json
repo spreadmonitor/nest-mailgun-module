@@ -11,10 +11,7 @@
     "experimentalDecorators": true,
     "sourceMap": true,
     "incremental": false,
-    "lib": ["es2017"],
-    "paths": {
-      "@core/*": ["./*"]
-    }
+    "lib": ["es2017"]
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "**/*.spec.ts"]
