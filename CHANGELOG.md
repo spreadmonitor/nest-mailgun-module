@@ -6,6 +6,12 @@ _This changelog follows the [keep a changelog][1] format to maintain a human rea
 
 _no changes since the last release yet._
 
+## [1.0.2][1.0.2] - 2020-08-04
+
+### Fixed
+
+- fix import paths in generated code
+
 ## [1.0.1][1.0.1] - 2020-07-27
 
 ### Fixed
@@ -48,6 +54,7 @@ Initial release.
 
 <!-- compare URL for every tagged release -->
 
+[1.0.2]: https://github.com/spreadmonitor/nest-mailgun-module/compare/v1.0.1...v1.0.2
 [1.0.1]: https://github.com/spreadmonitor/nest-mailgun-module/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/spreadmonitor/nest-mailgun-module/compare/v0.1.2...v1.0.0
 [0.1.2]: https://github.com/spreadmonitor/nest-mailgun-module/compare/v0.1.1...v0.1.2
