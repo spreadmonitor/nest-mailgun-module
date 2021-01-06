@@ -8,9 +8,9 @@ jobs:
       - uses: actions/cache@v2
         with:
           path: ~/.npm
-          key: npm-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            npm-
+            ${{ runner.os }}-node-
       - uses: actions/checkout@v1
       - uses: actions/setup-node@v1
       - run: npm ci --ignore-scripts
@@ -23,9 +23,9 @@ jobs:
       - uses: actions/cache@v2
         with:
           path: ~/.npm
-          key: npm-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            npm-
+            ${{ runner.os }}-node-
       - uses: actions/checkout@v1
       - uses: actions/setup-node@v1
       - run: npm ci --ignore-scripts
@@ -40,9 +40,9 @@ jobs:
       - uses: actions/cache@v2
         with:
           path: ~/.npm
-          key: npm-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            npm-
+            ${{ runner.os }}-node-
       - uses: actions/checkout@v1
       - uses: actions/setup-node@v1
       - run: npm ci --ignore-scripts
