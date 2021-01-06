@@ -1,6 +1,3 @@
-// const { pathsToModuleNameMapper } = require('ts-jest/utils');
-// const { compilerOptions } = require('./tsconfig');
-
 module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'node',
@@ -10,8 +7,7 @@ module.exports = {
   roots: ['./src/'],
   globals: {
     'ts-jest': {
-      tsConfig: './tsconfig.spec.json',
+      tsconfig: './tsconfig.spec.json',
     },
   },
-  // moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths),
 };
