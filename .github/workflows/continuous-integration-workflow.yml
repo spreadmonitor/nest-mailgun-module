@@ -5,14 +5,14 @@ jobs:
     name: Linters
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
       - uses: actions/cache@v2
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
       - run: npm ci --ignore-scripts
       - run: npm run prettier:check
       - run: npm run lint:check
@@ -20,14 +20,14 @@ jobs:
     name: Tests
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
       - uses: actions/cache@v2
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
       - run: npm ci --ignore-scripts
       - run: npm run test:ci
       - run: npm install codecov -g
@@ -37,13 +37,13 @@ jobs:
     needs: [tests, checks]
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
       - uses: actions/cache@v2
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
       - run: npm ci --ignore-scripts
       - run: npm run build
