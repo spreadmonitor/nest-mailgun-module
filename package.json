@@ -1,6 +1,6 @@
 {
   "name": "@spreadmonitor/nest-mailer-module",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Re-usable NestJS module for sending emails via Mailgun.",
   "author": "Spreadmonitor",
   "license": "MIT",
