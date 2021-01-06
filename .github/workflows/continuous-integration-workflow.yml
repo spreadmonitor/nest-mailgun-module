@@ -5,6 +5,12 @@ jobs:
     name: Linters
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: npm-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            npm-
       - uses: actions/checkout@v1
       - uses: actions/setup-node@v1
       - run: npm ci --ignore-scripts
@@ -14,6 +20,12 @@ jobs:
     name: Tests
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: npm-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            npm-
       - uses: actions/checkout@v1
       - uses: actions/setup-node@v1
       - run: npm ci --ignore-scripts
@@ -25,6 +37,12 @@ jobs:
     needs: [tests, checks]
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: npm-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            npm-
       - uses: actions/checkout@v1
       - uses: actions/setup-node@v1
       - run: npm ci --ignore-scripts
