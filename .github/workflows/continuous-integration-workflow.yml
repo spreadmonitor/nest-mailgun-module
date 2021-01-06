@@ -8,7 +8,7 @@ jobs:
       - uses: actions/cache@v2
         with:
           path: ~/.npm
-          key: npm-${{ hashFiles('package-lock.json') }}
+          key: npm-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             npm-
       - uses: actions/checkout@v1
@@ -23,7 +23,7 @@ jobs:
       - uses: actions/cache@v2
         with:
           path: ~/.npm
-          key: npm-${{ hashFiles('package-lock.json') }}
+          key: npm-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             npm-
       - uses: actions/checkout@v1
@@ -40,7 +40,7 @@ jobs:
       - uses: actions/cache@v2
         with:
           path: ~/.npm
-          key: npm-${{ hashFiles('package-lock.json') }}
+          key: npm-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             npm-
       - uses: actions/checkout@v1
