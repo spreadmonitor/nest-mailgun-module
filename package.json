@@ -34,7 +34,7 @@
     ]
   },
   "peerDependencies": {
-    "@nestjs/common": "^7.6.11",
+    "@nestjs/common": "^7.6.12",
     "@nestjs/core": "^7.6.11"
   },
   "dependencies": {
@@ -42,7 +42,7 @@
     "pug": "3.0.0"
   },
   "devDependencies": {
-    "@nestjs/common": "^7.6.11",
+    "@nestjs/common": "^7.6.12",
     "@nestjs/core": "^7.6.11",
     "@nestjs/testing": "^7.6.11",
     "@types/jest": "26.0.20",
